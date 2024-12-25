@@ -1,0 +1,85 @@
+nav {
+  display: flex;
+  font-size: large;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #345372;
+  padding: 10px;
+}
+
+nav h1 {
+  color: white;
+}
+
+.navLinks {
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.navLinks a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+.navLinks a:hover {
+  color: black;
+  background-color: #b4cded;
+  border-radius: 10px;
+  text-decoration: underline;
+}
+.navLinks .active {
+  color: #e7c800;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  padding: 14px 20px;
+  font-size: large;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+.dropbtn:hover {
+  background: #b4cded;
+  color: black;
+  border-radius: 10px;
+  text-decoration: underline;
+}
+
+.dropdown-content {
+  font-size: medium;
+  display: none;
+  position: absolute;
+  background-color: #345372;
+  color: white;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #b4cded;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+#logout:hover {
+  color: rgba(255, 0, 0);
+}
