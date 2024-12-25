@@ -1,0 +1,97 @@
+.main-container {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+h1 {
+  color: #b4cded;
+  font-style: oblique;
+}
+.allotment-parent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  width: 85vw;
+  border: 2px solid #b4cded;
+  padding: 20px;
+}
+.buyerId-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.buyerId-div input {
+  background: #b4cded;
+  border: none;
+}
+.buyerId-div input::placeholder {
+  color: black;
+}
+.label {
+  color: #fffbfb;
+  font-size: medium;
+}
+.buyer-input {
+  padding: 0 10px;
+  width: 70vw;
+  height: 5vh;
+  border-radius: 18px;
+  outline: black;
+}
+.stock {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 70vw;
+  height: 5vh;
+  border-radius: 18px;
+  outline: black;
+  color: black;
+  background-color: #b4cded;
+}
+.stock-selection-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.stocks {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.quantity {
+  padding: 0 5px;
+  border-radius: 10px;
+  outline: none;
+  border: 2px solid black;
+  height: 75%;
+  width: 25%;
+}
+.quantity::placeholder {
+  color: black;
+}
+.allot-stocks {
+  width: 70vw;
+  height: 5vh;
+  border-radius: 18px;
+  margin-top: 30px;
+  cursor: pointer;
+  font-size: large;
+  background-color: #2d517e;
+  color: #fffbfb;
+  border: none;
+  outline: none;
+}

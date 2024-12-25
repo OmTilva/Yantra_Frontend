@@ -1,47 +1,92 @@
-import "./App.css";
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LiveStocks from "./components/LiveStocks";
+import Ipo from "./components/Ipo";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/dashboard",
-      element: <> <Navbar /> <Dashboard /> </>,
+      element: (
+        <>
+          {" "}
+          <Navbar /> <Dashboard />{" "}
+        </>
+      ),
     },
     {
       path: "/liveboard",
-      element:<> <Navbar /> <LiveStocks /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar /> <LiveStocks />{" "}
+        </>
+      ),
     },
     {
       path: "/ipo",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar /> <Ipo />{" "}
+        </>
+      ),
     },
     {
       path: "/transaction",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
     },
     {
       path: "/search-account",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
     },
     {
       path: "/search-transaction",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
     },
     {
       path: "/search-ipo",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
     },
     {
       path: "/updater",
-      element:<> <Navbar /> </>
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
     },
     {
-      path: "/leaderboard", 
-      element:<> <Navbar /> </>
-    }
+      path: "/leaderboard",
+      element: (
+        <>
+          {" "}
+          <Navbar />{" "}
+        </>
+      ),
+    },
   ]);
   return (
     <>

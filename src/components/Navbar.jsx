@@ -1,7 +1,7 @@
+import "../styles/navbar.css";
 import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import "../styles/navbar.css";
 
 const Navbar = () => {
   const [logsDropdown, setLogsDropdown] = useState(false);

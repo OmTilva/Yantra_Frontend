@@ -19,7 +19,7 @@ h1 {
   row-gap: 20px;
   margin-bottom: 18px;
 }
-.stock {
+.liveStock {
   color: #f8f8ff;
   display: flex;
   flex-direction: column;

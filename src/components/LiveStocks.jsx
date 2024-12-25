@@ -30,7 +30,7 @@ const LiveStocks = () => {
       <div className="main-container">
         <h1>Live Stock Prices</h1>
         <div className="stocks-container">
-          <div className="stock">
+          <div className="liveStock">
             <span className="current-stock-name">1</span>
             <span className="stock-price-container">
               <p className={getColor(first)}>₹69.96</p>
@@ -40,7 +40,7 @@ const LiveStocks = () => {
             <p className={`${getColor(first)} percentage`}>{first}%</p>
           </div>
           {/* ig you can delete these next 4 "stock" divs.*/}
-          <div className="stock">
+          <div className="liveStock">
             <span className="current-stock-name">1</span>
             <span className="stock-price-container">
               <p className={getColor(second)}>₹69.96</p>
@@ -50,7 +50,7 @@ const LiveStocks = () => {
             <p className={`${getColor(second)} percentage`}>{second}%</p>
           </div>
 
-          <div className="stock">
+          <div className="liveStock">
             <span className="current-stock-name">1</span>
             <span className="stock-price-container">
               <p className={getColor(third)}>₹69.96</p>
@@ -60,7 +60,7 @@ const LiveStocks = () => {
             <p className={`${getColor(third)} percentage`}>{third}%</p>
           </div>
 
-          <div className="stock">
+          <div className="liveStock">
             <span className="current-stock-name">1</span>
             <span className="stock-price-container">
               <p className={getColor(first)}>₹69.96</p>
@@ -70,7 +70,7 @@ const LiveStocks = () => {
             <p className={`${getColor(first)} percentage`}>{first}%</p>
           </div>
 
-          <div className="stock">
+          <div className="liveStock">
             <span className="current-stock-name">1</span>
             <span className="stock-price-container">
               <p className={getColor(first)}>₹69.96</p>
