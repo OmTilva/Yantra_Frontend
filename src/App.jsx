@@ -10,8 +10,7 @@ function App() {
       path: "/dashboard",
       element: (
         <>
-          {" "}
-          <Navbar /> <Dashboard />{" "}
+          <Navbar /> <Dashboard />
         </>
       ),
     },
@@ -19,8 +18,7 @@ function App() {
       path: "/liveboard",
       element: (
         <>
-          {" "}
-          <Navbar /> <LiveStocks />{" "}
+          <Navbar /> <LiveStocks />
         </>
       ),
     },
@@ -28,8 +26,7 @@ function App() {
       path: "/ipo",
       element: (
         <>
-          {" "}
-          <Navbar /> <Ipo />{" "}
+          <Navbar /> <Ipo />
         </>
       ),
     },
@@ -37,8 +34,7 @@ function App() {
       path: "/transaction",
       element: (
         <>
-          {" "}
-          <Navbar />{" "}
+          <Navbar />
         </>
       ),
     },

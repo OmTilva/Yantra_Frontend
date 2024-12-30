@@ -95,3 +95,9 @@ h1 {
   border: none;
   outline: none;
 }
+button {
+  transition: transform 0.2s ease;
+}
+button:active {
+  transform: scale(0.95);
+}
