@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/livestocks.css";
+import styles from "../styles/livestocks.module.css";
 
 const LiveStocks = () => {
   const [first, setFirst] = useState("0.00");
@@ -8,13 +8,14 @@ const LiveStocks = () => {
 
   const getColor = (percentage) => {
     if (percentage > 0) {
-      return "green";
+      return styles.green;
     } else if (percentage < 0) {
-      return "red";
+      return styles.red;
     } else {
       return "";
     }
   };
+
   const stockArrow = (percentage) => {
     if (percentage > 0) {
       return "▲";
@@ -27,57 +28,67 @@ const LiveStocks = () => {
 
   return (
     <>
-      <div className="main-container">
+      <div className={styles["main-container"]}>
         <h1>Live Stock Prices</h1>
-        <div className="stocks-container">
-          <div className="liveStock">
-            <span className="current-stock-name">1</span>
-            <span className="stock-price-container">
+        <div className={styles["stocks-container"]}>
+          <div className={styles.liveStock}>
+            <span className={styles["current-stock-name"]}>1</span>
+            <span className={styles["stock-price-container"]}>
               <p className={getColor(first)}>₹69.96</p>
               <p className={getColor(first)}>{stockArrow(first)}</p>
             </span>
-            <p className="last-stock-price">Last: ₹65.29</p>
-            <p className={`${getColor(first)} percentage`}>{first}%</p>
+            <p className={styles["last-stock-price"]}>Last: ₹65.29</p>
+            <p className={`${getColor(first)} ${styles.percentage}`}>
+              {first}%
+            </p>
           </div>
-          {/* ig you can delete these next 4 "stock" divs.*/}
-          <div className="liveStock">
-            <span className="current-stock-name">1</span>
-            <span className="stock-price-container">
+
+          <div className={styles.liveStock}>
+            <span className={styles["current-stock-name"]}>1</span>
+            <span className={styles["stock-price-container"]}>
               <p className={getColor(second)}>₹69.96</p>
               <p className={getColor(second)}>{stockArrow(second)}</p>
             </span>
-            <p className="last-stock-price">Last: ₹65.29</p>
-            <p className={`${getColor(second)} percentage`}>{second}%</p>
+            <p className={styles["last-stock-price"]}>Last: ₹65.29</p>
+            <p className={`${getColor(second)} ${styles.percentage}`}>
+              {second}%
+            </p>
           </div>
 
-          <div className="liveStock">
-            <span className="current-stock-name">1</span>
-            <span className="stock-price-container">
+          <div className={styles.liveStock}>
+            <span className={styles["current-stock-name"]}>1</span>
+            <span className={styles["stock-price-container"]}>
               <p className={getColor(third)}>₹69.96</p>
               <p className={getColor(third)}>{stockArrow(third)}</p>
             </span>
-            <p className="last-stock-price">Last: ₹65.29</p>
-            <p className={`${getColor(third)} percentage`}>{third}%</p>
+            <p className={styles["last-stock-price"]}>Last: ₹65.29</p>
+            <p className={`${getColor(third)} ${styles.percentage}`}>
+              {third}%
+            </p>
           </div>
 
-          <div className="liveStock">
-            <span className="current-stock-name">1</span>
-            <span className="stock-price-container">
+          <div className={styles.liveStock}>
+            <span className={styles["current-stock-name"]}>1</span>
+            <span className={styles["stock-price-container"]}>
               <p className={getColor(first)}>₹69.96</p>
               <p className={getColor(first)}>{stockArrow(first)}</p>
             </span>
-            <p className="last-stock-price">Last: ₹65.29</p>
-            <p className={`${getColor(first)} percentage`}>{first}%</p>
+            <p className={styles["last-stock-price"]}>Last: ₹65.29</p>
+            <p className={`${getColor(first)} ${styles.percentage}`}>
+              {first}%
+            </p>
           </div>
 
-          <div className="liveStock">
-            <span className="current-stock-name">1</span>
-            <span className="stock-price-container">
+          <div className={styles.liveStock}>
+            <span className={styles["current-stock-name"]}>1</span>
+            <span className={styles["stock-price-container"]}>
               <p className={getColor(first)}>₹69.96</p>
               <p className={getColor(first)}>{stockArrow(first)}</p>
             </span>
-            <p className="last-stock-price">Last: ₹65.29</p>
-            <p className={`${getColor(second)} percentage`}>{second}%</p>
+            <p className={styles["last-stock-price"]}>Last: ₹65.29</p>
+            <p className={`${getColor(second)} ${styles.percentage}`}>
+              {second}%
+            </p>
           </div>
         </div>
       </div>

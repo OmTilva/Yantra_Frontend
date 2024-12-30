@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/ipo.css";
+import styles from "../styles/ipo.module.css";
 
 const Ipo = () => {
   const stocks = [
@@ -25,30 +25,31 @@ const Ipo = () => {
       alert("Please enter a valid Buyer ID");
     }
   };
+
   return (
     <>
-      <div className="main-container">
+      <div className={styles["main-container"]}>
         <h1>IPO Allotment (Multiple Stocks)</h1>
-        <div className="allotment-parent">
-          <div className="buyerId-div">
-            <span className="label">Buyer ID:</span>
+        <div className={styles["allotment-parent"]}>
+          <div className={styles["buyerId-div"]}>
+            <span className={styles.label}>Buyer ID:</span>
             <input
               type="number"
               placeholder="Enter Buyer ID"
-              className="buyer-input"
+              className={styles["buyer-input"]}
               onInput={handleInput}
             />
           </div>
-          <div className="stock-selection-div">
-            <span className="label">Select Stocks:</span>
-            <div className="stocks">
+          <div className={styles["stock-selection-div"]}>
+            <span className={styles.label}>Select Stocks:</span>
+            <div className={styles.stocks}>
               {stocks.map((stock, index) => (
-                <div className="stock" key={stock.id}>
+                <div className={styles.stock} key={stock.id}>
                   <span>{`${stock.name} (Price: ${stock.price})`}</span>
                   {showInput[index] && (
                     <input
                       type="number"
-                      className="quantity"
+                      className={styles.quantity}
                       placeholder="Enter Quantity"
                       onInput={handleInput}
                       min="0"
@@ -61,7 +62,7 @@ const Ipo = () => {
                 </div>
               ))}
             </div>
-            <button type="submit" className="allot-stocks">
+            <button type="submit" className={styles["allot-stocks"]}>
               Allot Stocks
             </button>
           </div>

@@ -1,4 +1,4 @@
-import "../styles/navbar.css";
+import styles from "../styles/navbar.module.css";
 import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
@@ -9,32 +9,82 @@ const Navbar = () => {
   const toggleLogsDropdown = () => {
     setLogsDropdown(!logsDropdown);
   };
+
   return (
     <>
-      <nav>
+      <nav className={styles.nav}>
         <div>
           <h1>Dalal Street</h1>
         </div>
-        <div className="navLinks">
-          <NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink>
-          <NavLink to="/liveboard" activeClassName="active">Live Stocks</NavLink>
-          <NavLink to="/ipo" activeClassName="active">Allot IPO</NavLink>
-          <NavLink to="/transaction" activeClassName="active">Transaction</NavLink>
-          <div className="dropdown">
-            <button onClick={toggleLogsDropdown} className="dropbtn">
+        <div className={styles.navLinks}>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Dashboard
+          </NavLink>
+          <NavLink
+            to="/liveboard"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Live Stocks
+          </NavLink>
+          <NavLink
+            to="/ipo"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Allot IPO
+          </NavLink>
+          <NavLink
+            to="/transaction"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Transaction
+          </NavLink>
+          <div className={styles.dropdown}>
+            <button onClick={toggleLogsDropdown} className={styles.dropbtn}>
               Logs
             </button>
             {logsDropdown && (
-              <div className="dropdown-content">
-                <NavLink to="/search-transaction" activeClassName="active">Transaction Logs</NavLink>
-                <NavLink to="/search-ipo" activeClassName="active">IPO Logs</NavLink>
+              <div className={styles["dropdown-content"]}>
+                <NavLink
+                  to="/search-transaction"
+                  className={({ isActive }) => (isActive ? styles.active : "")}
+                >
+                  Transaction Logs
+                </NavLink>
+                <NavLink
+                  to="/search-ipo"
+                  className={({ isActive }) => (isActive ? styles.active : "")}
+                >
+                  IPO Logs
+                </NavLink>
               </div>
             )}
           </div>
-          <NavLink to="/updater" activeClassName="active">Updates</NavLink>
-          <NavLink to="/search-account" activeClassName="active">Search</NavLink>
-          <NavLink to="/leaderboard" activeClassName="active">Leaderboard</NavLink>
-          <NavLink to="/login" id="logout" activeClassName="active">
+          <NavLink
+            to="/updater"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Updates
+          </NavLink>
+          <NavLink
+            to="/search-account"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Search
+          </NavLink>
+          <NavLink
+            to="/leaderboard"
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
+            Leaderboard
+          </NavLink>
+          <NavLink
+            to="/login"
+            id={styles.logout}
+            className={({ isActive }) => (isActive ? styles.active : "")}
+          >
             Logout
           </NavLink>
         </div>
