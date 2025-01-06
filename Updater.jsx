@@ -1,16 +1,15 @@
-// Updater.jsx
 import React from "react";
-import "./Updater.css";
+import styles from "./Updater.module.css";
 
 function Updater() {
   return (
-    <div className="updater-container">
-      <main className="content">
+    <div className={styles.updaterContainer}>
+      <main className={styles.content}>
         <h1>STOCK UPDATER</h1>
 
-        <section className="single-stock">
+        <section className={styles.singleStock}>
           <h2>Update Single Stock</h2>
-          <div className="form-group">
+          <div className={styles.formGroup}>
             <select>
               <option disabled selected>Select a stock</option>
               <option>Stock 1</option>
@@ -45,19 +44,19 @@ function Updater() {
               <option>By Percentage</option>
             </select>
             <select>
-              <option disabled selected>Select to Increase or Dicrease</option>
+              <option disabled selected>Select to Increase or Decrease</option>
               <option>Increase</option>
               <option>Decrease</option>
             </select>
           </div>
-          <input type="text" placeholder="Enter Value" className="placeholder"/>
+          <input type="text" placeholder="Enter Value" className={styles.placeholder} />
           <button>Update Stock</button>
         </section>
 
-        <section className="whole-market">
+        <section className={styles.wholeMarket}>
           <h2>Update Whole Market</h2>
-          <input type="text" placeholder="Enter Percentage" className="placeholder"/>
-          <div className="form-group">
+          <input type="text" placeholder="Enter Percentage" className={styles.placeholder} />
+          <div className={styles.formGroup}>
             <select>
               <option disabled selected>Select to Increase or Decrease</option>
               <option>Increase</option>
