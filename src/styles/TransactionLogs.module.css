@@ -5,8 +5,6 @@
   color: #fff;
   font-family: system-ui, -apple-system, sans-serif;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
 }
 
 .container {
@@ -138,19 +136,16 @@
   padding: 2rem;
 }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
+@media (max-width: 768px) {
+  .body {
+    padding: 1rem;
+  }
 
-::-webkit-scrollbar-track {
-  background: gainsboro;
-}
+  .inputGroup {
+    grid-template-columns: 1fr;
+  }
 
-::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  .tableContainer {
+    overflow-x: auto;
+  }
 }

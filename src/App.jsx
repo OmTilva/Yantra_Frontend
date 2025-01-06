@@ -7,6 +7,8 @@ import AccountSearch from "./components/AccountSearch";
 import IpoLogs from "./components/IpoLogs";
 import TransactionLogs from "./components/TransactionLogs";
 import Transaction from "./components/Transaction";
+import Leaderboard from "./components/Leaderboard";
+import Updater from "./components/Updater";
 
 function App() {
   const router = createBrowserRouter([
@@ -75,7 +77,7 @@ function App() {
       element: (
         <>
           {" "}
-          <Navbar />{" "}
+          <Navbar /> <Updater />
         </>
       ),
     },
@@ -84,7 +86,7 @@ function App() {
       element: (
         <>
           {" "}
-          <Navbar />{" "}
+          <Navbar /> <Leaderboard />
         </>
       ),
     },

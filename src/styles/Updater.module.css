@@ -1,0 +1,172 @@
+.body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  color: #b4cded;
+  padding: 20px;
+}
+
+.updaterContainer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 10px;
+  padding: 2rem;
+  background-color: #1a3244;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mainTitle {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.sectionsContainer {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.singleStock,
+.wholeMarket {
+  flex: 1;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.singleStock h2,
+.wholeMarket h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #b4cded;
+  text-align: center;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+input {
+  background-color: #262727;
+  color: white;
+}
+
+input::placeholder {
+  color: #9ba3af;
+}
+
+select {
+  background-color: #b1dafc;
+  color: #1a3244;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2d517e;
+  box-shadow: 0 0 0 2px rgba(45, 81, 126, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #2d517e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #1a3244;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.error {
+  border-color: #e53e3e !important;
+}
+
+.errorText {
+  color: #fc8181;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  text-align: left;
+  display: block;
+}
+
+.message {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.success {
+  background-color: #2f855a;
+  color: white;
+}
+
+.error {
+  background-color: #c53030;
+  color: white;
+}
+
+@media (max-width: 1024px) {
+  .sectionsContainer {
+    flex-direction: column;
+  }
+
+  .singleStock,
+  .wholeMarket {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .updaterContainer {
+    padding: 1rem;
+  }
+
+  .mainTitle {
+    font-size: 2rem;
+  }
+
+  .singleStock h2,
+  .wholeMarket h2 {
+    font-size: 1.5rem;
+  }
+
+  .singleStock,
+  .wholeMarket {
+    padding: 1.5rem;
+  }
+}
