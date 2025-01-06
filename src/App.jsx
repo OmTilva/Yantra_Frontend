@@ -3,6 +3,7 @@ import Dashboard from "./components/Dashboard";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LiveStocks from "./components/LiveStocks";
 import Ipo from "./components/Ipo";
+import AccountSearch from "./components/AccountSearch";
 
 function App() {
   const router = createBrowserRouter([
@@ -43,7 +44,7 @@ function App() {
       element: (
         <>
           {" "}
-          <Navbar />{" "}
+          <Navbar /> <AccountSearch />
         </>
       ),
     },
