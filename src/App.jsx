@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LiveStocks from "./components/LiveStocks";
 import Ipo from "./components/Ipo";
 import AccountSearch from "./components/AccountSearch";
+import IpoLogs from "./components/IpoLogs";
+import TransactionLogs from "./components/TransactionLogs";
 
 function App() {
   const router = createBrowserRouter([
@@ -53,7 +55,7 @@ function App() {
       element: (
         <>
           {" "}
-          <Navbar />{" "}
+          <Navbar /> <TransactionLogs />
         </>
       ),
     },
@@ -62,7 +64,7 @@ function App() {
       element: (
         <>
           {" "}
-          <Navbar />{" "}
+          <Navbar /> <IpoLogs />
         </>
       ),
     },
