@@ -6,6 +6,7 @@ import Ipo from "./components/Ipo";
 import AccountSearch from "./components/AccountSearch";
 import IpoLogs from "./components/IpoLogs";
 import TransactionLogs from "./components/TransactionLogs";
+import Transaction from "./components/Transaction";
 
 function App() {
   const router = createBrowserRouter([
@@ -38,6 +39,7 @@ function App() {
       element: (
         <>
           <Navbar />
+          <Transaction />
         </>
       ),
     },
