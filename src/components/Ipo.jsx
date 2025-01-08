@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/Ipo.module.css";
+import styles from "../styles/ipo.module.css";
 
 const Ipo = () => {
   const stocks = [
