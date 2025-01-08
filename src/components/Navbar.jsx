@@ -1,13 +1,17 @@
 import styles from "../styles/navbar.module.css";
 import React from "react";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({  }) => {
+  const navigate = useNavigate();
   const [logsDropdown, setLogsDropdown] = useState(false);
 
   const toggleLogsDropdown = () => {
     setLogsDropdown(!logsDropdown);
+  };
+  const handleLogout = () => {
+    navigate("/login");
   };
 
   return (
@@ -80,13 +84,13 @@ const Navbar = () => {
           >
             Leaderboard
           </NavLink>
-          <NavLink
-            to="/login"
+          <button
+            onClick={handleLogout}
             id={styles.logout}
             className={({ isActive }) => (isActive ? styles.active : "")}
           >
             Logout
-          </NavLink>
+          </button>
         </div>
       </nav>
     </>
