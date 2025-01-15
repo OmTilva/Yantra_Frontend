@@ -1,6 +1,6 @@
 import Navbar from "./components/Navbar";
 import Dashboard from "./components/Dashboard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,19 +16,90 @@ import Transaction from "./components/Transaction";
 import Leaderboard from "./components/Leaderboard";
 import Updater from "./components/Updater";
 import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import AddStocks from "./components/AddStocks";
+import axios from "axios";
+import { validateToken, validateRole, clearAuthData } from "./SecurityUtils";
+import Loader from "./assets/loader";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const handleLogin = (username, password) => {
-    // Perform login logic here
-    // For now, we'll just set the user as logged in
-    setIsLoggedIn(true);
+  useEffect(() => {
+    // Initialize state from localStorage on mount
+    const token = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("userRole");
+
+    if (token && validateToken(token) && validateRole(storedRole)) {
+      setIsLoggedIn(true);
+      setUserRole(storedRole);
+    }
+
+    checkAuthStatus();
+  }, []);
+
+  const checkAuthStatus = async () => {
+    const token = localStorage.getItem("token");
+    const storedRole = localStorage.getItem("userRole");
+
+    if (!token || !validateToken(token) || !validateRole(storedRole)) {
+      clearAuthData();
+      setIsLoggedIn(false);
+      setUserRole(null);
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/auth/role`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.role !== storedRole) {
+        clearAuthData();
+        setIsLoggedIn(false);
+        setUserRole(null);
+      } else {
+        setIsLoggedIn(true);
+        setUserRole(storedRole);
+      }
+    } catch (error) {
+      // Only logout on auth errors
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        clearAuthData();
+        setIsLoggedIn(false);
+        setUserRole(null);
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = (role) => {
+    if (validateRole(role)) {
+      setIsLoggedIn(true);
+      setUserRole(role);
+    }
   };
 
   const handleLogout = () => {
+    clearAuthData();
     setIsLoggedIn(false);
+    setUserRole(null);
   };
+
+  // Important: Return the loader properly
+  if (loading) {
+    return <Loader />;
+  }
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -36,13 +107,40 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login onLogin={handleLogin} />,
+      element: isLoggedIn ? (
+        <Navigate
+          to={
+            userRole === "admin"
+              ? "/listStocks"
+              : userRole === "jobber"
+              ? "/liveboard"
+              : userRole === "banker"
+              ? "/dashboard"
+              : "/liveboard"
+          }
+        />
+      ) : (
+        <Login onLogin={handleLogin} />
+      ),
     },
     {
       path: "/dashboard",
       element: (
         <>
-          <Navbar onLogout={handleLogout} /> <Dashboard />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <Dashboard />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+
+    {
+      path: "/listStocks",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <AddStocks />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -50,7 +148,10 @@ function App() {
       path: "/liveboard",
       element: (
         <>
-          <Navbar /> <LiveStocks />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <LiveStocks />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -58,7 +159,9 @@ function App() {
       path: "/ipo",
       element: (
         <>
-          <Navbar /> <Ipo />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <Ipo />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -66,8 +169,10 @@ function App() {
       path: "/transaction",
       element: (
         <>
-          <Navbar />
-          <Transaction />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />
+            <Transaction />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -75,8 +180,10 @@ function App() {
       path: "/search-account",
       element: (
         <>
-          {" "}
-          <Navbar /> <AccountSearch />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <AccountSearch />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -84,8 +191,10 @@ function App() {
       path: "/search-transaction",
       element: (
         <>
-          {" "}
-          <Navbar /> <TransactionLogs />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <TransactionLogs />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -93,8 +202,9 @@ function App() {
       path: "/search-ipo",
       element: (
         <>
-          {" "}
-          <Navbar /> <IpoLogs />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <IpoLogs />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -102,8 +212,9 @@ function App() {
       path: "/updater",
       element: (
         <>
-          {" "}
-          <Navbar /> <Updater />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <Updater />
+          </ProtectedRoute>
         </>
       ),
     },
@@ -111,8 +222,10 @@ function App() {
       path: "/leaderboard",
       element: (
         <>
-          {" "}
-          <Navbar /> <Leaderboard />
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <Leaderboard />
+          </ProtectedRoute>
         </>
       ),
     },
