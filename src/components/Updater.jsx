@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "../styles/Updater.module.css";
 
 function Updater() {
@@ -13,8 +14,30 @@ function Updater() {
 
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState({ text: "", type: "" });
+  const [stocks, setStocks] = useState([]);
 
-  const stocks = Array.from({ length: 25 }, (_, i) => `Stock ${i + 1}`);
+  useEffect(() => {
+    const fetchStocks = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/stocks/allStocks`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setStocks(response.data);
+      } catch (error) {
+        setMessage({
+          text: error.response?.data?.message || "Failed to fetch stocks",
+          type: "error",
+        });
+      }
+    };
+
+    fetchStocks();
+  }, []);
 
   const validateSingleUpdate = () => {
     const newErrors = {};
@@ -60,17 +83,38 @@ function Updater() {
     }
   };
 
-  const handleSingleUpdate = (e) => {
+  const handleSingleUpdate = async (e) => {
     e.preventDefault();
     if (validateSingleUpdate()) {
-      setMessage({ text: "Stock updated successfully!", type: "success" });
-      setFormData((prev) => ({
-        ...prev,
-        selectedStock: "",
-        updateType: "",
-        updateDirection: "",
-        singleValue: "",
-      }));
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/stocks/update-stock`,
+          {
+            stockName: formData.selectedStock,
+            value: parseFloat(formData.singleValue),
+            type: formData.updateType,
+            action: formData.updateDirection,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setMessage({ text: "Stock updated successfully!", type: "success" });
+        setFormData((prev) => ({
+          ...prev,
+          selectedStock: "",
+          updateType: "",
+          updateDirection: "",
+          singleValue: "",
+        }));
+      } catch (error) {
+        setMessage({
+          text: error.response?.data?.message || "Failed to update stock",
+          type: "error",
+        });
+      }
     } else {
       setMessage({
         text: "Please fill all required fields correctly",
@@ -79,15 +123,34 @@ function Updater() {
     }
   };
 
-  const handleMarketUpdate = (e) => {
+  const handleMarketUpdate = async (e) => {
     e.preventDefault();
     if (validateMarketUpdate()) {
-      setMessage({ text: "Market updated successfully!", type: "success" });
-      setFormData((prev) => ({
-        ...prev,
-        marketPercentage: "",
-        marketDirection: "",
-      }));
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BASE_URL}/stocks/update-market`,
+          {
+            percentage: parseFloat(formData.marketPercentage),
+            action: formData.marketDirection,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        setMessage({ text: "Market updated successfully!", type: "success" });
+        setFormData((prev) => ({
+          ...prev,
+          marketPercentage: "",
+          marketDirection: "",
+        }));
+      } catch (error) {
+        setMessage({
+          text: error.response?.data?.message || "Failed to update market",
+          type: "error",
+        });
+      }
     } else {
       setMessage({
         text: "Please fill all required fields correctly",
@@ -122,8 +185,8 @@ function Updater() {
                     Select a stock
                   </option>
                   {stocks.map((stock) => (
-                    <option key={stock} value={stock}>
-                      {stock}
+                    <option key={stock._id} value={stock.stockName}>
+                      {stock.stockName}
                     </option>
                   ))}
                 </select>
