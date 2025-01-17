@@ -9,7 +9,8 @@ export const navItems = {
     { path: "/create-user", label: "Create User" },
     { path: "/allot-multiple-stocks", label: "Allot Stocks" },
     { path: "/ipo", label: "Allot IPO" },
-    { path: "/transaction", label: "Transaction" },
+    { path: "/transaction", label: "Trade" },
+    { path: "/market-trade", label: "Market Trade" },
     {
       label: "Logs",
       children: [
@@ -25,7 +26,8 @@ export const navItems = {
     { path: "/listStocks", label: "List Stock" },
     { path: "/liveboard", label: "Live Stocks" },
     { path: "/ipo", label: "Allot IPO" },
-    { path: "/transaction", label: "Transaction" },
+    { path: "/transaction", label: "Trade" },
+    { path: "/market-trade", label: "Market Trade" },
     {
       label: "Logs",
       children: [

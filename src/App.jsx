@@ -25,6 +25,7 @@ import CreateUser from "./components/CreateUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AllotMultipleStocks from "./components/AllotMultipleStocks";
+import TransactionMarket from "./components/TransactionMarket";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -197,6 +198,17 @@ function App() {
           <ProtectedRoute userRole={userRole}>
             <Navbar userRole={userRole} onLogout={handleLogout} />
             <Transaction />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/market-trade",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />
+            <TransactionMarket />
           </ProtectedRoute>
         </>
       ),
