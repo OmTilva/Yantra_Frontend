@@ -21,6 +21,10 @@ import AddStocks from "./components/AddStocks";
 import axios from "axios";
 import { validateToken, validateRole, clearAuthData } from "./SecurityUtils";
 import Loader from "./assets/loader";
+import CreateUser from "./components/CreateUser";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import AllotMultipleStocks from "./components/AllotMultipleStocks";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -133,7 +137,28 @@ function App() {
         </>
       ),
     },
-
+    {
+      path: "/allot-multiple-stocks",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <AllotMultipleStocks />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/create-user",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <CreateUser />
+          </ProtectedRoute>
+        </>
+      ),
+    },
     {
       path: "/listStocks",
       element: (
@@ -233,6 +258,12 @@ function App() {
   return (
     <>
       <RouterProvider router={router} />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        theme="dark"
+      />
     </>
   );
 }

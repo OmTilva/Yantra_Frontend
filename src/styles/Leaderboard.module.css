@@ -1,39 +1,26 @@
 .body {
-  margin: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
-  font-family: Arial, sans-serif;
-  color: #b4cded;
-}
-
-.container {
-  width: 90vw;
-  height: 79vh;
-  background-color: #022c4e;
-  border: 2px solid #4a90e2;
-  border-radius: 15px;
   padding: 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
+  height: fit-content;
+  color: #b4cded;
 }
 
 .leaderboardContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+  width: 80%;
+  background-color: #1a3244;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
 }
 
 .leaderboardTitle {
-  position: sticky;
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 15px;
   text-align: center;
+  margin-bottom: 2rem;
   color: #b4cded;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .table {
@@ -44,29 +31,20 @@
 
 .tableHeader {
   background-color: rgba(177, 218, 252, 0.83);
-  font-weight: bold;
-  color: black;
-  font-size: 18px;
-  text-align: center;
 }
 
 .headerCell {
   padding: 15px;
   border: 2px solid rgba(2, 44, 78, 0.5);
   border-radius: 10px;
-  background-color: rgba(177, 218, 252, 0.83);
+  text-align: left;
+  font-weight: bold;
+  color: #022c4e;
+  margin-left: 20px;
 }
 
 .tableBody {
-  width: 100%;
-}
-
-.tableRow {
   background-color: #0d2338;
-  text-align: center;
-  color: #b4cded;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
 .tableRow:hover {
@@ -75,22 +53,20 @@
 
 .tableCell {
   padding: 15px;
-  border: 2px solid #4a90e2;
-  border-radius: 10px;
+  border: 1px solid #4a90e2;
+  color: #b4cded;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: gainsboro;
+  background: #1a3244;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background-color: #4a90e2;
   border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  border: 2px solid #1a3244;
 }

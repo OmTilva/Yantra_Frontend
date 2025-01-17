@@ -1,106 +1,106 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styles from "../styles/ipo.module.css";
 
 const Ipo = () => {
-  const stocks = [
-    { id: 1, name: "ACME Corp", price: 117 },
-    { id: 2, name: "TechStart Inc", price: 120 },
-    { id: 3, name: "GreenEnergy Ltd", price: 95 },
-    { id: 4, name: "HealthCare Plus", price: 135 },
-    { id: 5, name: "FinTech Solutions", price: 85 },
-  ];
-
-  const [buyerId, setBuyerId] = useState("");
+  const [ipoStocks, setIpoStocks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [selectedStocks, setSelectedStocks] = useState({});
   const [quantities, setQuantities] = useState({});
-  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchIPOStocks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/stocks/allIpo`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setIpoStocks(response.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err.response?.data?.message || "Failed to fetch IPO stocks");
+        setLoading(false);
+      }
+    };
+
+    fetchIPOStocks();
+  }, []);
 
   const handleStockSelection = (stockId) => {
     setSelectedStocks((prev) => ({
       ...prev,
       [stockId]: !prev[stockId],
     }));
-
     if (!selectedStocks[stockId]) {
-      setQuantities((prev) => ({
-        ...prev,
-        [stockId]: "",
-      }));
+      setQuantities((prev) => ({ ...prev, [stockId]: "" }));
     }
   };
 
   const handleQuantityChange = (stockId, value) => {
-    if (value < 0) {
-      setError("Quantity cannot be negative");
-      return;
-    }
-    setError("");
-    setQuantities((prev) => ({
-      ...prev,
-      [stockId]: value,
-    }));
+    setQuantities((prev) => ({ ...prev, [stockId]: value }));
   };
 
   const calculateTotal = () => {
-    return Object.entries(quantities).reduce((total, [stockId, quantity]) => {
-      const stock = stocks.find((s) => s.id === parseInt(stockId));
-      return total + stock.price * (parseInt(quantity) || 0);
+    return ipoStocks.reduce((total, stock) => {
+      if (selectedStocks[stock._id] && quantities[stock._id]) {
+        return total + stock.ipoDetails.issuePrice * Number(quantities[stock._id]);
+      }
+      return total;
     }, 0);
   };
 
+  if (loading) return <div className={styles.container}>Loading stocks...</div>;
+  if (error) return <div className={styles.error}>{error}</div>;
+
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>IPO Stock Allocation</h1>
-
-      {error && <div className={styles.error}>{error}</div>}
-
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Buyer ID:</label>
-        <input
-          type="text"
-          value={buyerId}
-          onChange={(e) => setBuyerId(e.target.value)}
-          placeholder="Enter your buyer ID"
-          className={styles.input}
-        />
-      </div>
-
+      <h1 className={styles.title}>Available IPOs</h1>
       <div className={styles.stocksContainer}>
-        <h2 className={styles.subtitle}>Available Stocks</h2>
-        {stocks.map((stock) => (
-          <div key={stock.id} className={styles.stockItem}>
+        {ipoStocks.map((stock) => (
+          <div key={stock._id} className={styles.stockItem}>
             <div className={styles.stockInfo}>
               <input
                 type="checkbox"
-                checked={selectedStocks[stock.id] || false}
-                onChange={() => handleStockSelection(stock.id)}
                 className={styles.checkbox}
+                checked={selectedStocks[stock._id] || false}
+                onChange={() => handleStockSelection(stock._id)}
               />
-              <span className={styles.stockName}>{stock.name}</span>
-              <span className={styles.stockPrice}>₹{stock.price}</span>
+              <span className={styles.stockName}>{stock.stockName}</span>
+              <span className={styles.stockPrice}>
+                ₹{stock.ipoDetails.issuePrice}
+              </span>
             </div>
-            {selectedStocks[stock.id] && (
+            {selectedStocks[stock._id] && (
               <input
                 type="number"
-                placeholder="Quantity"
-                className={styles.quantityInput}
-                value={quantities[stock.id] || ""}
-                onChange={(e) => handleQuantityChange(stock.id, e.target.value)}
                 min="1"
+                className={styles.quantityInput}
+                value={quantities[stock._id] || ""}
+                onChange={(e) => handleQuantityChange(stock._id, e.target.value)}
+                placeholder="Quantity"
               />
             )}
           </div>
         ))}
       </div>
-
+      
       <div className={styles.totalSection}>
-        <span className={styles.totalLabel}>Total:</span>
-        <span className={styles.totalAmount}>
-          ₹{calculateTotal().toLocaleString()}
-        </span>
+        <span className={styles.totalLabel}>Total Amount:</span>
+        <span className={styles.totalAmount}>₹{calculateTotal().toFixed(2)}</span>
       </div>
-
-      <button className={styles.submitButton}>Submit Allocation Request</button>
+      
+      <button 
+        className={styles.submitButton}
+        onClick={() => {/* TODO: Implement submit logic */}}
+      >
+        Subscribe to Selected IPOs
+      </button>
     </div>
   );
 };

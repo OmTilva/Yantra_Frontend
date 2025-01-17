@@ -1,0 +1,92 @@
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #356aa6;
+  border-radius: 8px;
+  color: white;
+}
+.h2 {
+  margin-top: 18px;
+  text-align: center;
+  color: white;
+  font-size: 26px;
+}
+/* Toast customization */
+:global(.Toastify__toast) {
+  width: fit-content;
+  background: #1a3244;
+  color: white;
+  display: flex !important;
+  align-items: start !important;
+  justify-content: space-between;
+}
+
+:global(.Toastify__toast-body) {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+
+:global(.Toastify__close-button) {
+  width: fit-content;
+  position: relative !important;
+  top: 0 !important;
+  right: 0 !important;
+  color: white !important;
+  opacity: 0.7;
+}
+
+:global(.Toastify__close-button:hover) {
+  opacity: 1;
+}
+
+:global(.Toastify__toast--success) {
+  background: #065f46;
+}
+
+:global(.Toastify__toast--error) {
+  background: #991b1b;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGroup input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.error {
+  color: #ff4444;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.submitButton {
+  background: #2563eb;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submitButton:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}

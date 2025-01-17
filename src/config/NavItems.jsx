@@ -6,6 +6,8 @@ export const navItems = {
   ],
   banker: [
     { path: "/dashboard", label: "Dashboard" },
+    { path: "/create-user", label: "Create User" },
+    { path: "/allot-multiple-stocks", label: "Allot Stocks" },
     { path: "/ipo", label: "Allot IPO" },
     { path: "/transaction", label: "Transaction" },
     {
@@ -18,6 +20,8 @@ export const navItems = {
     },
   ],
   admin: [
+    { path: "/create-user", label: "Create User" },
+    { path: "/allot-multiple-stocks", label: "Allot Stocks" },
     { path: "/listStocks", label: "List Stock" },
     { path: "/liveboard", label: "Live Stocks" },
     { path: "/ipo", label: "Allot IPO" },
