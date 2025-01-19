@@ -8,7 +8,7 @@ export const navItems = {
     { path: "/dashboard", label: "Dashboard" },
     { path: "/create-user", label: "Create User" },
     { path: "/allot-multiple-stocks", label: "Allot Stocks" },
-    { path: "/ipo", label: "Allot IPO" },
+    // { path: "/ipo", label: "Allot IPO" },
     { path: "/transaction", label: "Trade" },
     { path: "/market-trade", label: "Market Trade" },
     {
@@ -16,7 +16,7 @@ export const navItems = {
       children: [
         { path: "/search-account", label: "Search Account" },
         { path: "/search-transaction", label: "Search Transaction" },
-        { path: "/search-ipo", label: "Search IPO" },
+        // { path: "/search-ipo", label: "Search IPO" },
       ],
     },
   ],
