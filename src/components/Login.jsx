@@ -7,10 +7,12 @@ const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const response = await axios.post(
@@ -45,6 +47,8 @@ const Login = ({ onLogin }) => {
       }
     } catch (error) {
       setError(error.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,7 +65,7 @@ const Login = ({ onLogin }) => {
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <h2>Login</h2>
-          {error && <div className={styles.error}>{error}</div>}
+          {error && <div className={`${styles.error} ${styles.errorMessage}`}>{error}</div>}
           <div className={styles.formGroup}>
             <label htmlFor="username">Username</label>
             <input
@@ -82,8 +86,8 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
-          <button type="submit" className={styles.loginButton}>
-            Login
+          <button type="submit" className={styles.loginButton} disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

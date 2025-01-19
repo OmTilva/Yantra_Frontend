@@ -19,6 +19,7 @@ const rolePermissions = {
     "dashboard",
     "allot-multiple-stocks",
     "create-user",
+    "assign-role",
     "listStocks",
     "liveboard",
     "ipo",

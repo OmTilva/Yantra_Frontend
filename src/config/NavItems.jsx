@@ -22,6 +22,7 @@ export const navItems = {
   ],
   admin: [
     { path: "/create-user", label: "Create User" },
+    { path: "/assign-role", label: "Assign Role" },
     { path: "/allot-multiple-stocks", label: "Allot Stocks" },
     { path: "/listStocks", label: "List Stock" },
     { path: "/liveboard", label: "Live Stocks" },

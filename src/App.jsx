@@ -26,6 +26,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AllotMultipleStocks from "./components/AllotMultipleStocks";
 import TransactionMarket from "./components/TransactionMarket";
+import AssignRole from "./components/AssignRole";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -156,6 +157,17 @@ function App() {
           <ProtectedRoute userRole={userRole}>
             <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
             <CreateUser />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/assign-role",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <AssignRole />
           </ProtectedRoute>
         </>
       ),
