@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/AddStocks.module.css";
 
 const AddStocks = () => {
@@ -15,8 +17,6 @@ const AddStocks = () => {
       listingDate: "",
     },
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +41,7 @@ const AddStocks = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      // Set availableUnits equal to totalUnits initialy
+      // Set availableUnits equal to totalUnits initially
       const submitData = {
         ...formData,
         availableUnits: formData.totalUnits,
@@ -56,7 +56,7 @@ const AddStocks = () => {
           },
         }
       );
-      setSuccess("Stock added successfully!");
+      toast.success("Stock added successfully!");
       setFormData({
         stockName: "",
         currentPrice: "",
@@ -70,7 +70,7 @@ const AddStocks = () => {
         },
       });
     } catch (error) {
-      setError(error.response?.data?.message || "Failed to add stock");
+      toast.error(error.response?.data?.message || "Failed to add stock");
     }
   };
 
@@ -78,9 +78,6 @@ const AddStocks = () => {
     <>
       <h2 className={styles.h2}>Add New Stock</h2>
       <div className={styles.container}>
-        {error && <div className={styles.error}>{error}</div>}
-        {success && <div className={styles.success}>{success}</div>}
-
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
             <label>Stock Name:</label>
@@ -101,6 +98,7 @@ const AddStocks = () => {
               value={formData.currentPrice}
               onChange={handleChange}
               min="0"
+              step="0.01"
               required
             />
           </div>
