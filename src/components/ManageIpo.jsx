@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import styles from "../styles/ManageIPO.module.css";
+import styles from "../styles/ManageIpo.module.css";
 
 const ManageIPO = () => {
   const [ipos, setIpos] = useState([]);
