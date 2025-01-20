@@ -27,9 +27,9 @@ import "react-toastify/dist/ReactToastify.css";
 import AllotMultipleStocks from "./components/AllotMultipleStocks";
 import TransactionMarket from "./components/TransactionMarket";
 import AssignRole from "./components/AssignRole";
-import ApplyIPO from "./components/ApplyIPO";
-import AllotIPO from "./components/AllotIPO";
-import ManageIPO from "./components/ManageIPO";
+import ApplyIPO from "./components/ApplyIpo";
+import AllotIPO from "./components/AllotIpo";
+import ManageIPO from "./components/ManageIpo";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
