@@ -13,6 +13,7 @@
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
+  max-height: 80vh; /* Ensure the container doesn't exceed viewport height */
 }
 
 .leaderboardTitle {
@@ -69,4 +70,20 @@
   background-color: #4a90e2;
   border-radius: 10px;
   border: 2px solid #1a3244;
+}
+
+@media (max-width: 768px) {
+  .leaderboardContainer {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .headerCell,
+  .tableCell {
+    padding: 10px;
+  }
+
+  .leaderboardTitle {
+    font-size: 1.5rem;
+  }
 }

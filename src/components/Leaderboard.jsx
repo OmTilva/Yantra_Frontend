@@ -51,7 +51,8 @@ const Leaderboard = () => {
                 <tr className={styles.tableRow} key={index}>
                   <td className={styles.tableCell}>{index + 1}</td>
                   <td className={styles.tableCell}>{item.username}</td>
-                  <td className={styles.tableCell}>₹
+                  <td className={styles.tableCell}>
+                    ₹
                     {item.totalValue
                       ? item.totalValue.toLocaleString("en-IN", {
                           minimumFractionDigits: 2,
