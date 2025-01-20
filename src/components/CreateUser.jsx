@@ -57,7 +57,7 @@ const CreateUser = () => {
                 setFormData({ ...formData, username: e.target.value })
               }
               required
-              minLength={3}
+              minLength={1}
             />
           </div>
           <div className={styles.formGroup}>

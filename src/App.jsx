@@ -27,6 +27,9 @@ import "react-toastify/dist/ReactToastify.css";
 import AllotMultipleStocks from "./components/AllotMultipleStocks";
 import TransactionMarket from "./components/TransactionMarket";
 import AssignRole from "./components/AssignRole";
+import ApplyIPO from "./components/ApplyIPO";
+import AllotIPO from "./components/AllotIPO";
+import ManageIPO from "./components/ManageIPO";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -193,12 +196,42 @@ function App() {
         </>
       ),
     },
+    // {
+    //   path: "/ipo",
+    //   element: (
+    //     <>
+    //       <ProtectedRoute userRole={userRole}>
+    //         <Navbar userRole={userRole} onLogout={handleLogout} /> <Ipo />
+    //       </ProtectedRoute>
+    //     </>
+    //   ),
+    // },
     {
-      path: "/ipo",
+      path: "/apply-ipo",
       element: (
         <>
           <ProtectedRoute userRole={userRole}>
-            <Navbar userRole={userRole} onLogout={handleLogout} /> <Ipo />
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <ApplyIPO />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/allot-ipo",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <AllotIPO />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/manage-ipo",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} /> <ManageIPO />
           </ProtectedRoute>
         </>
       ),

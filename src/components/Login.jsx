@@ -65,7 +65,11 @@ const Login = ({ onLogin }) => {
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <h2>Login</h2>
-          {error && <div className={`${styles.error} ${styles.errorMessage}`}>{error}</div>}
+          {error && (
+            <div className={`${styles.error} ${styles.errorMessage}`}>
+              {error}
+            </div>
+          )}
           <div className={styles.formGroup}>
             <label htmlFor="username">Username</label>
             <input
@@ -86,7 +90,11 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
-          <button type="submit" className={styles.loginButton} disabled={loading}>
+          <button
+            type="submit"
+            className={styles.loginButton}
+            disabled={loading}
+          >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
