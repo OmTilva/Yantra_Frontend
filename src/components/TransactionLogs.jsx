@@ -1,231 +1,105 @@
 import React, { useState } from "react";
+import axios from "axios";
 import styles from "../styles/TransactionLogs.module.css";
 
-const transactionLogs = [
-  {
-    adminUsername: "admin123",
-    buyerId: "buyer001",
-    sellerId: "seller001",
-    column2: "Data 2",
-    column3: "Data 3",
-    column4: "Data 4",
-    column5: "Data 5",
-    column6: "Data 6",
-  },
-  {
-    adminUsername: "admin123",
-    buyerId: "buyer001",
-    sellerId: "seller001",
-    column2: "Data 2",
-    column3: "Data 3",
-    column4: "Data 4",
-    column5: "Data 5",
-    column6: "Data 6",
-  },
-  {
-    adminUsername: "admin123",
-    buyerId: "buyer001",
-    sellerId: "seller001",
-    column2: "Data 2",
-    column3: "Data 3",
-    column4: "Data 4",
-    column5: "Data 5",
-    column6: "Data 6",
-  },
-  {
-    adminUsername: "admin123",
-    buyerId: "buyer001",
-    sellerId: "seller001",
-    column2: "Data 2",
-    column3: "Data 3",
-    column4: "Data 4",
-    column5: "Data 5",
-    column6: "Data 6",
-  },
-  {
-    adminUsername: "admin123",
-    buyerId: "buyer001",
-    sellerId: "seller001",
-    column2: "Data 2",
-    column3: "Data 3",
-    column4: "Data 4",
-    column5: "Data 5",
-    column6: "Data 6",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-  {
-    adminUsername: "admin456",
-    buyerId: "buyer002",
-    sellerId: "seller002",
-    column2: "Data B",
-    column3: "Data C",
-    column4: "Data D",
-    column5: "Data E",
-    column6: "Data F",
-  },
-];
-
 const TransactionLogs = () => {
-  const [searchAdmin, setSearchAdmin] = useState("");
-  const [searchBuyer, setSearchBuyer] = useState("");
-  const [searchSeller, setSearchSeller] = useState("");
-  const [filteredLogs, setFilteredLogs] = useState(transactionLogs);
+  const [bankerName, setBankerName] = useState("");
+  const [buyerName, setBuyerName] = useState("");
+  const [sellerName, setSellerName] = useState("");
+  const [transactions, setTransactions] = useState([]);
+  const [error, setError] = useState("");
 
-  const handleSearch = () => {
-    const filtered = transactionLogs.filter(
-      (log) =>
-        (searchAdmin === "" ||
-          log.adminUsername
-            .toLowerCase()
-            .includes(searchAdmin.toLowerCase())) &&
-        (searchBuyer === "" ||
-          log.buyerId.toLowerCase().includes(searchBuyer.toLowerCase())) &&
-        (searchSeller === "" ||
-          log.sellerId.toLowerCase().includes(searchSeller.toLowerCase()))
-    );
-    setFilteredLogs(filtered);
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/logs/searchTransaction`,
+        {
+          params: { bankerName, buyerName, sellerName },
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+      setTransactions(response.data);
+      setError("");
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to fetch transactions");
+      setTransactions([]);
+    }
   };
 
   return (
-    <div className={styles.body}>
-      <div className={styles.container}>
-        <h1 className={styles.heading}>Search Transaction Log</h1>
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.header}>SEARCH TRANSACTIONS</div>
 
-        <div className={styles.searchForm}>
+        <div className={styles.searchBox}>
           <div className={styles.inputGroup}>
-            <label className={styles.label}>
-              Admin Username
-              <input
-                type="text"
-                value={searchAdmin}
-                onChange={(e) => setSearchAdmin(e.target.value)}
-                className={styles.input}
-                placeholder="Enter admin username"
-              />
-            </label>
-
-            <label className={styles.label}>
-              Buyer ID
-              <input
-                type="text"
-                value={searchBuyer}
-                onChange={(e) => setSearchBuyer(e.target.value)}
-                className={styles.input}
-                placeholder="Enter buyer ID"
-              />
-            </label>
-
-            <label className={styles.label}>
-              Seller ID
-              <input
-                type="text"
-                value={searchSeller}
-                onChange={(e) => setSearchSeller(e.target.value)}
-                className={styles.input}
-                placeholder="Enter seller ID"
-              />
-            </label>
+            <label className={styles.label}>BANKER NAME:</label>
+            <input
+              type="text"
+              value={bankerName}
+              onChange={(e) => setBankerName(e.target.value)}
+              className={styles.input}
+            />
           </div>
 
-          <button onClick={handleSearch} className={styles.button}>
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>BUYER NAME:</label>
+            <input
+              type="text"
+              value={buyerName}
+              onChange={(e) => setBuyerName(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <label className={styles.label}>SELLER NAME:</label>
+            <input
+              type="text"
+              value={sellerName}
+              onChange={(e) => setSellerName(e.target.value)}
+              className={styles.input}
+            />
+          </div>
+
+          <button onClick={handleSearch} className={styles.searchButton}>
             Search
           </button>
-        </div>
 
-        <div className={styles.tableSection}>
-          <div className={styles.tableContainer}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Admin Username</th>
-                  <th>Column 2</th>
-                  <th>Column 3</th>
-                  <th>Column 4</th>
-                  <th>Column 5</th>
-                  <th>Column 6</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredLogs.length > 0 ? (
-                  filteredLogs.map((log, index) => (
-                    <tr key={index}>
-                      <td>{log.adminUsername}</td>
-                      <td>{log.column2}</td>
-                      <td>{log.column3}</td>
-                      <td>{log.column4}</td>
-                      <td>{log.column5}</td>
-                      <td>{log.column6}</td>
-                    </tr>
-                  ))
-                ) : (
+          {error && <div className={styles.error}>{error}</div>}
+
+          {transactions.length > 0 && (
+            <div className={styles.results}>
+              <table className={styles.table}>
+                <thead>
                   <tr>
-                    <td colSpan="6" className={styles.noResults}>
-                      No matching records found
-                    </td>
+                    <th>Transaction ID</th>
+                    <th>Banker Username</th>
+                    <th>Buyer ID</th>
+                    <th>Seller ID</th>
+                    <th>Stock Number</th>
+                    <th>Units</th>
+                    <th>Price</th>
+                    <th>Total Price</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {transactions.map((transaction, index) => (
+                    <tr key={index}>
+                      <td>{transaction.transactionID}</td>
+                      <td>{transaction.bankerUsername}</td>
+                      <td>{transaction.buyerID}</td>
+                      <td>{transaction.sellerID}</td>
+                      <td>{transaction.stockNumber}</td>
+                      <td>{transaction.units}</td>
+                      <td>{transaction.price}</td>
+                      <td>{transaction.totalPrice}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>

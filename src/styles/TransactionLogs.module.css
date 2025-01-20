@@ -1,10 +1,8 @@
 .body {
   margin: 0;
   padding: 1rem;
-  height: 90vh;
   color: #fff;
   font-family: system-ui, -apple-system, sans-serif;
-  overflow-y: auto;
 }
 
 .container {
@@ -13,18 +11,19 @@
   padding: 1rem;
 }
 
-.heading {
+.header {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 2rem;
   color: #fff;
 }
 
-.searchForm {
+.searchBox {
   background-color: #1c2b3a;
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
+  overflow-y: auto;
 }
 
 .inputGroup {
@@ -56,7 +55,7 @@
   border-color: #3366cc;
 }
 
-.button {
+.searchButton {
   display: block;
   width: 100%;
   padding: 0.75rem;
@@ -69,38 +68,25 @@
   transition: background-color 0.2s;
 }
 
-.button:hover {
+.searchButton:hover {
   background-color: #28549c;
 }
 
-.tableSection {
-  height: calc(100vh - 400px);
-  min-height: 400px;
-  overflow-y: auto;
+.error {
+  color: #ff6b6b;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.results {
+  margin-top: 2rem;
 }
 
 .tableContainer {
-  border-radius: 8px;
-  background-color: #1c2b3a;
+  max-height: 400px; /* Adjust this value as needed */
   overflow-y: auto;
-  max-height: 100%;
-}
-.tableContainer::-webkit-scrollbar {
-  width: 8px;
-}
-
-.tableContainer::-webkit-scrollbar-track {
-  background: #1c2b3a;
+  border: 1px solid #334759;
   border-radius: 4px;
-}
-
-.tableContainer::-webkit-scrollbar-thumb {
-  background: #3366cc;
-  border-radius: 4px;
-}
-
-.tableContainer::-webkit-scrollbar-thumb:hover {
-  background: #28549c;
 }
 
 .table {
@@ -134,18 +120,4 @@
   text-align: center;
   color: #a9bcd0;
   padding: 2rem;
-}
-
-@media (max-width: 768px) {
-  .body {
-    padding: 1rem;
-  }
-
-  .inputGroup {
-    grid-template-columns: 1fr;
-  }
-
-  .tableContainer {
-    overflow-x: auto;
-  }
 }
