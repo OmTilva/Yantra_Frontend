@@ -30,6 +30,7 @@ import AssignRole from "./components/AssignRole";
 import ApplyIPO from "./components/ApplyIpo";
 import AllotIPO from "./components/AllotIpo";
 import ManageIPO from "./components/ManageIpo";
+import CreateBrokerHouse from "./components/CreateBrokerHouse";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -165,6 +166,17 @@ function App() {
       ),
     },
     {
+      path: "/create-brokerhouse",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <CreateBrokerHouse />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
       path: "/assign-role",
       element: (
         <>
@@ -196,16 +208,6 @@ function App() {
         </>
       ),
     },
-    // {
-    //   path: "/ipo",
-    //   element: (
-    //     <>
-    //       <ProtectedRoute userRole={userRole}>
-    //         <Navbar userRole={userRole} onLogout={handleLogout} /> <Ipo />
-    //       </ProtectedRoute>
-    //     </>
-    //   ),
-    // },
     {
       path: "/apply-ipo",
       element: (

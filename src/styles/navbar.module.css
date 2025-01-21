@@ -5,6 +5,7 @@ nav {
   align-items: center;
   background-color: #345372;
   padding: 10px;
+  width: 100%;
 }
 
 nav h1 {
@@ -15,11 +16,12 @@ nav h1 {
   font-size: large;
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 .navLinks a {
   color: white;
-  padding: 14px 20px;
+  padding: 5px 5px;
   text-decoration: none;
   text-align: center;
 }

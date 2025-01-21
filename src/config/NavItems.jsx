@@ -1,6 +1,7 @@
 export const navItems = {
   user: [{ path: "/liveboard", label: "Live Stocks" }],
   jobber: [
+    { path: "/dashboard", label: "Dashboard" },
     { path: "/liveboard", label: "Live Stocks" },
     { path: "/leaderboard", label: "Leaderboard" },
   ],
@@ -23,13 +24,13 @@ export const navItems = {
   admin: [
     { path: "/create-user", label: "Create User" },
     { path: "/assign-role", label: "Assign Role" },
+    { path: "/create-brokerhouse", label: "BrokerHouse" },
     { path: "/listStocks", label: "List Stock" },
     { path: "/allot-multiple-stocks", label: "Portfolio Building" },
     { path: "/liveboard", label: "Live Stocks" },
-    // { path: "/ipo", label: "Allot IPO" },
     { path: "/apply-ipo", label: "Apply IPO" },
     { path: "/allot-ipo", label: "Allot IPO" },
-    {path: "/manage-ipo", label: "Manage IPO"},
+    { path: "/manage-ipo", label: "Manage IPO" },
     { path: "/transaction", label: "Trade" },
     { path: "/market-trade", label: "Market Trade" },
     {
