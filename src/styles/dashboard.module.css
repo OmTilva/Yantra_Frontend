@@ -10,13 +10,13 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.h2 {
   margin-bottom: 20px;
   font-size: 28px;
   color: #ecf0f1;
 }
 
-p {
+.p {
   margin: 10px 0;
   font-size: 20px;
   color: #bdc3c7;

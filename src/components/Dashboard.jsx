@@ -52,8 +52,8 @@ const Dashboard = () => {
       {role === "jobber" && brokerHouse ? (
         <div>
           <h2 className={styles.h2}>Welcome, Jobber</h2>
-          <p>BrokerHouse: {brokerHouse.name}</p>
-          <p>Current Brokerage: {currentBrokerage}%</p>
+          <p className={styles.p}>BrokerHouse: {brokerHouse.name}</p>
+          <p className={styles.p}>Current Brokerage: {currentBrokerage}%</p>
         </div>
       ) : (
         <h2>Hello, Welcome</h2>

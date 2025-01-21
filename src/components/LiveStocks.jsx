@@ -62,7 +62,7 @@ const LiveStocks = () => {
 
   return (
     <div className={styles["main-container"]}>
-      <h1>Live Stock Prices</h1>
+      <h1 className={styles.h1}>Live Stock Prices</h1>
       <div className={styles["stocks-container"]}>
         {stocks.map((stock) => {
           const percentChange = calculatePercentageChange(
