@@ -14,6 +14,9 @@ body {
   background-attachment: fixed;
   font-family: Arial, sans-serif;
   color: black;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 }
 /* Scrollbar styles */
 ::-webkit-scrollbar {
@@ -31,10 +34,4 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
-}
-
-/* Apply the scrollbar styles to the entire site */
-body {
-  scrollbar-width: thin;
-  scrollbar-color: #888 #f1f1f1;
 }

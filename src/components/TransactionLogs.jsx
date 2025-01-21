@@ -75,9 +75,9 @@ const TransactionLogs = () => {
                   <tr>
                     <th>Transaction ID</th>
                     <th>Banker Username</th>
-                    <th>Buyer ID</th>
-                    <th>Seller ID</th>
-                    <th>Stock Number</th>
+                    <th>Buyer Name</th>
+                    <th>Seller Name</th>
+                    <th>Stock Name</th>
                     <th>Units</th>
                     <th>Price</th>
                     <th>Total Price</th>
@@ -88,9 +88,9 @@ const TransactionLogs = () => {
                     <tr key={index}>
                       <td>{transaction.transactionID}</td>
                       <td>{transaction.bankerUsername}</td>
-                      <td>{transaction.buyerID}</td>
-                      <td>{transaction.sellerID}</td>
-                      <td>{transaction.stockNumber}</td>
+                      <td>{transaction.buyerID.username}</td>
+                      <td>{transaction.sellerID.username}</td>
+                      <td>{transaction.stockNumber.stockName}</td>
                       <td>{transaction.units}</td>
                       <td>{transaction.price}</td>
                       <td>{transaction.totalPrice}</td>

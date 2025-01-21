@@ -1,14 +1,11 @@
-.body {
-  margin: 0;
-  padding: 1rem;
-  color: #fff;
-  font-family: system-ui, -apple-system, sans-serif;
+body {
+  overflow-y: auto;
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
+  overflow-y: auto; /* Add scrollbar when content overflows */
 }
 
 .header {
@@ -23,7 +20,6 @@
   padding: 1.5rem;
   border-radius: 8px;
   margin-bottom: 2rem;
-  overflow-y: auto;
 }
 
 .inputGroup {
@@ -84,7 +80,6 @@
 
 .tableContainer {
   max-height: 400px; /* Adjust this value as needed */
-  overflow-y: auto;
   border: 1px solid #334759;
   border-radius: 4px;
 }
