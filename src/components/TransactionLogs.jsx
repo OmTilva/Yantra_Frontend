@@ -8,6 +8,7 @@ const TransactionLogs = () => {
   const [sellerName, setSellerName] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState("");
+  
 
   const handleSearch = async () => {
     try {
