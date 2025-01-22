@@ -11,8 +11,7 @@ const AllotMultipleStocks = () => {
   const [loading, setLoading] = useState(false);
   const [totalSum, setTotalSum] = useState(0);
   const [selectedUserId, setSelectedUserId] = useState("");
-
-  const WALLET_LIMIT = 1000000; // Ten lakhs
+  const [selectedUserBalance, setSelectedUserBalance] = useState(0);
 
   useEffect(() => {
     fetchUsers();
@@ -22,6 +21,13 @@ const AllotMultipleStocks = () => {
   useEffect(() => {
     calculateTotalSum();
   }, [allotments]);
+
+  useEffect(() => {
+    if (selectedUserId) {
+      const selectedUser = users.find((user) => user._id === selectedUserId);
+      setSelectedUserBalance(selectedUser ? selectedUser.balance : 0);
+    }
+  }, [selectedUserId, users]);
 
   const fetchUsers = async () => {
     try {
@@ -214,7 +220,7 @@ const AllotMultipleStocks = () => {
               <button
                 type="submit"
                 className={styles.submitButton}
-                disabled={loading || totalSum > WALLET_LIMIT}
+                disabled={loading || totalSum > selectedUserBalance}
               >
                 {loading ? "Allotting..." : "Allot Stocks"}
               </button>
