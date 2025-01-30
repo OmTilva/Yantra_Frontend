@@ -8,7 +8,6 @@ const TransactionLogs = () => {
   const [sellerName, setSellerName] = useState("");
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState("");
-  
 
   const handleSearch = async () => {
     try {
@@ -89,8 +88,10 @@ const TransactionLogs = () => {
                     <tr key={index}>
                       <td>{transaction.transactionID}</td>
                       <td>{transaction.bankerUsername}</td>
-                      <td>{transaction.buyerID.username}</td>
-                      <td>{transaction.sellerID.username}</td>
+                      {/* <td>{transaction.buyerID.username}</td>
+                      <td>{transaction.sellerID.username}</td> */}
+                      <td>{transaction.buyerID?.username || "N/A"}</td>
+                      <td>{transaction.sellerID?.username || "N/A"}</td>
                       <td>{transaction.stockNumber.stockName}</td>
                       <td>{transaction.units}</td>
                       <td>{transaction.price}</td>
