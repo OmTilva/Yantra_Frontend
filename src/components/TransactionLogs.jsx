@@ -88,14 +88,12 @@ const TransactionLogs = () => {
                     <tr key={index}>
                       <td>{transaction.transactionID}</td>
                       <td>{transaction.bankerUsername}</td>
-                      {/* <td>{transaction.buyerID.username}</td>
-                      <td>{transaction.sellerID.username}</td> */}
                       <td>{transaction.buyerID?.username || "N/A"}</td>
                       <td>{transaction.sellerID?.username || "N/A"}</td>
                       <td>{transaction.stockNumber.stockName}</td>
                       <td>{transaction.units}</td>
-                      <td>{transaction.price}</td>
-                      <td>{transaction.totalPrice}</td>
+                      <td>{transaction.price.toFixed(2)}</td>
+                      <td>{transaction.totalPrice.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>

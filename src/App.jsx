@@ -24,7 +24,6 @@ import CreateUser from "./components/CreateUser";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AllotMultipleStocks from "./components/AllotMultipleStocks";
-import TransactionMarket from "./components/TransactionMarket";
 import AssignRole from "./components/AssignRole";
 import ApplyIPO from "./components/ApplyIpo";
 import AllotIPO from "./components/AllotIpo";
@@ -260,17 +259,7 @@ function App() {
         </>
       ),
     },
-    {
-      path: "/market-trade",
-      element: (
-        <>
-          <ProtectedRoute userRole={userRole}>
-            <Navbar userRole={userRole} onLogout={handleLogout} />
-            <TransactionMarket />
-          </ProtectedRoute>
-        </>
-      ),
-    },
+
     {
       path: "/search-account",
       element: (

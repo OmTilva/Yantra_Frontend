@@ -1,16 +1,26 @@
-.formContainer {
-  padding: 20px;
+.container {
   background: #1a3244;
   border-radius: 8px;
   color: white;
-  margin: 20px;
-  max-width: 600px;
+  max-width: 1200px; /* Increased max-width to accommodate both forms */
   margin: 20px auto;
+  display: flex;
+  justify-content: space-between; /* Justify space between the forms */
+  gap: 20px; /* Add gap between the forms */
 }
 
 .title {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.formContainer {
+  flex: 1; /* Allow the form containers to grow equally */
+  padding: 10px;
+  background: #1a3244;
+  border-radius: 8px;
+  color: white;
+  margin: 10px;
 }
 
 .form {
@@ -44,15 +54,32 @@
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.3s ease;
-  margin-top: 20px;
 }
 
 .submitBtn:hover {
   background-color: #2b4f7c;
 }
 
+.message {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
 @media (max-width: 768px) {
-  .formContainer {
+  .container {
+    flex-direction: column; /* Stack forms vertically on small screens */
     padding: 1.5rem;
     width: 95%;
   }

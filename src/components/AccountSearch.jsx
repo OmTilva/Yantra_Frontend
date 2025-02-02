@@ -62,7 +62,7 @@ const AccountSearch = () => {
               <div className={styles.accountInfo}>
                 <div>Account Details</div>
                 <div>USERNAME: {accountDetails.username}</div>
-                <div>BALANCE: {accountDetails.balance}</div>
+                <div>BALANCE: {accountDetails.balance.toFixed(2)}</div>
                 <div>STOCKS:</div>
               </div>
 
@@ -80,7 +80,7 @@ const AccountSearch = () => {
                     <tr key={index}>
                       <td>{stock.stock.stockName}</td>
                       <td>{stock.quantity}</td>
-                      <td>{stock.averageBuyPrice}</td>
+                      <td>{stock.averageBuyPrice.toFixed(2)}</td>
                       <td>
                         {(stock.quantity * stock.averageBuyPrice).toFixed(2)}
                       </td>

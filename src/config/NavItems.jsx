@@ -3,7 +3,6 @@ export const navItems = {
   jobber: [
     { path: "/dashboard", label: "Dashboard" },
     { path: "/liveboard", label: "Live Stocks" },
-    { path: "/leaderboard", label: "Leaderboard" },
   ],
   banker: [
     { path: "/dashboard", label: "Dashboard" },
@@ -11,7 +10,6 @@ export const navItems = {
     { path: "/allot-multiple-stocks", label: "Allot Stocks" },
     { path: "/apply-ipo", label: "Apply IPO" },
     { path: "/transaction", label: "Trade" },
-    { path: "/market-trade", label: "Market Trade" },
     {
       label: "Logs",
       children: [
@@ -32,7 +30,6 @@ export const navItems = {
     { path: "/allot-ipo", label: "Allot IPO" },
     { path: "/manage-ipo", label: "Manage IPO" },
     { path: "/transaction", label: "Trade" },
-    { path: "/market-trade", label: "Market Trade" },
     {
       label: "Logs",
       children: [
