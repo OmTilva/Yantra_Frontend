@@ -7,7 +7,6 @@ import styles from "../styles/ApplyIpo.module.css";
 const ApplyIPO = () => {
   const [ipos, setIpos] = useState([]);
   const [selectedIpo, setSelectedIpo] = useState("");
-  const [lots, setLots] = useState(0);
   const [username, setUsername] = useState("");
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const ApplyIPO = () => {
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/stocks/apply-ipo`,
-        { username, stockId: selectedIpo, lots },
+        { username, stockId: selectedIpo, lots: 1 },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -46,7 +45,6 @@ const ApplyIPO = () => {
       toast.success(response.data.message);
       setUsername("");
       setSelectedIpo("");
-      setLots(0);
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to apply for IPO");
     }
@@ -83,14 +81,7 @@ const ApplyIPO = () => {
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="lotsInput">Number of Lots:</label>
-        <input
-          id="lotsInput"
-          type="number"
-          placeholder="Number of Lots"
-          value={lots}
-          onChange={(e) => setLots(e.target.value)}
-          min="1"
-        />
+        <input id="lotsInput" type="number" value={1} disabled />
       </div>
       <button onClick={handleApply}>Apply</button>
     </div>

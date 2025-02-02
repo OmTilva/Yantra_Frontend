@@ -1,60 +1,162 @@
-import React, { useState } from "react";
-import styles from "../styles/IpoLogs.module.css";
+// import React, { useState } from "react";
+// import axios from "axios";
+// import styles from "../styles/IpoLogs.module.css";
 
-const logs = [
-  {
-    ipoId: "12345",
-    adminUsername: "admin123",
-    buyerId: "buyer001", 
-    balanceBefore: "₹50,000",
-    balanceAfter: "₹40,000",
-    actionDate: "2024-12-27",
-    stocksBought: [
-      {
-        stockNumber: "ABC001",
-        units: 10,
-        pricePerUnit: "₹1,000",
-        totalCost: "₹10,000",
-      },
-    ],
-  },
-  {
-    ipoId: "67890",
-    adminUsername: "admin456", 
-    buyerId: "buyer002",
-    balanceBefore: "₹60,000",
-    balanceAfter: "₹55,000",
-    actionDate: "2024-12-26",
-    stocksBought: [
-      {
-        stockNumber: "XYZ002",
-        units: 5,
-        pricePerUnit: "₹1,000",
-        totalCost: "₹5,000",
-      },
-    ],
-  },
-];
+// const IpoLogs = () => {
+//   const [searchAdmin, setSearchAdmin] = useState("");
+//   const [searchBuyer, setSearchBuyer] = useState("");
+//   const [filteredLogs, setFilteredLogs] = useState([]);
+//   const [loading, setLoading] = useState(false);
+
+//   const handleSearch = async () => {
+//     setLoading(true);
+//     try {
+//       const token = localStorage.getItem("token");
+//       const response = await axios.get(
+//         `${import.meta.env.VITE_BASE_URL}/logs/ipoLogs`,
+//         {
+//           params: {
+//             adminName: searchAdmin,
+//             buyerName: searchBuyer,
+//           },
+//           headers: { Authorization: `Bearer ${token}` },
+//         }
+//       );
+//       setFilteredLogs(response.data);
+//     } catch (err) {
+//       console.error("Failed to fetch IPO logs:", err);
+//       setFilteredLogs([]);
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className={styles.body}>
+//       <div className={styles.container}>
+//         <h1 className={styles.heading}>Search IPO Allotment Log</h1>
+
+//         <div className={styles.searchForm}>
+//           <div className={styles.inputGroup}>
+//             <label className={styles.label}>
+//               Admin Username
+//               <input
+//                 type="text"
+//                 value={searchAdmin}
+//                 onChange={(e) => setSearchAdmin(e.target.value)}
+//                 className={styles.input}
+//                 placeholder="Enter admin username"
+//               />
+//             </label>
+
+//             <label className={styles.label}>
+//               Buyer Username
+//               <input
+//                 type="text"
+//                 value={searchBuyer}
+//                 onChange={(e) => setSearchBuyer(e.target.value)}
+//                 className={styles.input}
+//                 placeholder="Enter buyer username"
+//               />
+//             </label>
+//           </div>
+
+//           <button
+//             onClick={handleSearch}
+//             className={styles.button}
+//             disabled={loading}
+//           >
+//             {loading ? "Searching..." : "Search"}
+//           </button>
+//         </div>
+
+//         <section className={styles.logsSection}>
+//           <h2 className={styles.subheading}>Logs</h2>
+
+//           <div className={styles.logsContainer}>
+//             {filteredLogs.length > 0 ? (
+//               filteredLogs.map((log, index) => (
+//                 <div className={styles.logEntry} key={log.transactionID}>
+//                   <div className={styles.logHeader}>
+//                     <span>Transaction ID: {log.transactionID}</span>
+//                     <span>
+//                       Date: {new Date(log.transactionDate).toLocaleDateString()}
+//                     </span>
+//                   </div>
+
+//                   <div className={styles.logDetails}>
+//                     <div className={styles.userInfo}>
+//                       <p>Admin: {log.adminID.username}</p>
+//                       <p>Buyer: {log.userID.username}</p>
+//                     </div>
+
+//                     {/* <div className={styles.balanceInfo}>
+//                       <p>Initial Balance: {log.balanceBefore}</p>
+//                       <p>Final Balance: {log.balanceAfter}</p>
+//                     </div> */}
+
+//                     <div className={styles.stocksInfo}>
+//                       <h3>Purchased Stocks</h3>
+//                       <div className={styles.stockEntry}>
+//                         <p>Stock: {log.stockID.stockName}</p>
+//                         <p>Units: {log.allottedUnits}</p>
+//                         <p>Price/Unit: ₹{log.pricePerUnit}</p>
+//                         <p>Total: ₹{log.totalPrice}</p>
+//                       </div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               ))
+//             ) : (
+//               <p className={styles.noResults}>No matching logs found.</p>
+//             )}
+//           </div>
+//         </section>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default IpoLogs;
+import React, { useState } from "react";
+import axios from "axios";
+import styles from "../styles/IpoLogs.module.css";
 
 const IpoLogs = () => {
   const [searchAdmin, setSearchAdmin] = useState("");
   const [searchBuyer, setSearchBuyer] = useState("");
-  const [filteredLogs, setFilteredLogs] = useState(logs);
+  const [filteredLogs, setFilteredLogs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    const result = logs.filter(
-      (log) =>
-        (searchAdmin === "" || log.adminUsername.toLowerCase().includes(searchAdmin.toLowerCase())) &&
-        (searchBuyer === "" || log.buyerId.toLowerCase().includes(searchBuyer.toLowerCase()))
-    );
-    setFilteredLogs(result);
+  const handleSearch = async () => {
+    setLoading(true);
+    try {
+      const token = localStorage.getItem("token");
+      const params = {};
+      if (searchAdmin) params.adminName = searchAdmin;
+      if (searchBuyer) params.buyerName = searchBuyer;
+
+      const response = await axios.get(
+        `${import.meta.env.VITE_BASE_URL}/logs/ipoLogs`,
+        {
+          params,
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setFilteredLogs(response.data);
+    } catch (err) {
+      console.error("Failed to fetch IPO logs:", err);
+      setFilteredLogs([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className={styles.body}>
       <div className={styles.container}>
         <h1 className={styles.heading}>Search IPO Allotment Log</h1>
-        
+
         <div className={styles.searchForm}>
           <div className={styles.inputGroup}>
             <label className={styles.label}>
@@ -67,57 +169,56 @@ const IpoLogs = () => {
                 placeholder="Enter admin username"
               />
             </label>
-            
+
             <label className={styles.label}>
-              Buyer ID
+              Buyer Username
               <input
                 type="text"
                 value={searchBuyer}
                 onChange={(e) => setSearchBuyer(e.target.value)}
                 className={styles.input}
-                placeholder="Enter buyer ID"
+                placeholder="Enter buyer username"
               />
             </label>
           </div>
-          
-          <button onClick={handleSearch} className={styles.button}>
-            Search
+
+          <button
+            onClick={handleSearch}
+            className={styles.button}
+            disabled={loading}
+          >
+            {loading ? "Searching..." : "Search"}
           </button>
         </div>
 
         <section className={styles.logsSection}>
           <h2 className={styles.subheading}>Logs</h2>
-          
+
           <div className={styles.logsContainer}>
             {filteredLogs.length > 0 ? (
               filteredLogs.map((log, index) => (
-                <div className={styles.logEntry} key={log.ipoId}>
+                <div className={styles.logEntry} key={log.transactionID}>
                   <div className={styles.logHeader}>
-                    <span>IPO ID: {log.ipoId}</span>
-                    <span>Date: {log.actionDate}</span>
+                    <span>Transaction ID: {log.transactionID}</span>
+                    <span>
+                      Date: {new Date(log.transactionDate).toLocaleDateString()}
+                    </span>
                   </div>
-                  
+
                   <div className={styles.logDetails}>
                     <div className={styles.userInfo}>
-                      <p>Admin: {log.adminUsername}</p>
-                      <p>Buyer: {log.buyerId}</p>
+                      <p>Admin: {log.adminID.username}</p>
+                      <p>Buyer: {log.userID.username}</p>
                     </div>
-                    
-                    <div className={styles.balanceInfo}>
-                      <p>Initial Balance: {log.balanceBefore}</p>
-                      <p>Final Balance: {log.balanceAfter}</p>
-                    </div>
-                    
+
                     <div className={styles.stocksInfo}>
                       <h3>Purchased Stocks</h3>
-                      {log.stocksBought.map((stock, idx) => (
-                        <div key={idx} className={styles.stockEntry}>
-                          <p>Stock: {stock.stockNumber}</p>
-                          <p>Units: {stock.units}</p>
-                          <p>Price/Unit: {stock.pricePerUnit}</p>
-                          <p>Total: {stock.totalCost}</p>
-                        </div>
-                      ))}
+                      <div className={styles.stockEntry}>
+                        <p>Stock: {log.stockID.stockName}</p>
+                        <p>Units: {log.allottedUnits}</p>
+                        <p>Price/Unit: ₹{log.pricePerUnit}</p>
+                        <p>Total: ₹{log.totalPrice}</p>
+                      </div>
                     </div>
                   </div>
                 </div>

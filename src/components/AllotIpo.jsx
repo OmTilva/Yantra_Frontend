@@ -9,7 +9,6 @@ const AllotIPO = () => {
   const [selectedIpo, setSelectedIpo] = useState("");
   const [applicants, setApplicants] = useState([]);
   const [selectedApplicant, setSelectedApplicant] = useState("");
-  const [lots, setLots] = useState(0);
 
   useEffect(() => {
     fetchCompletedIPOs();
@@ -50,8 +49,7 @@ const AllotIPO = () => {
   };
 
   const handleAllot = async () => {
-    console.log(selectedApplicant, lots);
-    if (!selectedApplicant || lots <= 0) {
+    if (!selectedApplicant) {
       toast.error("Please select an applicant and enter valid lots");
       return;
     }
@@ -62,7 +60,7 @@ const AllotIPO = () => {
         {
           stockName: selectedIpo,
           username: selectedApplicant,
-          lots,
+          lots: 1,
         },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
@@ -119,9 +117,8 @@ const AllotIPO = () => {
           id="lotsInput"
           type="number"
           placeholder="Number of Lots"
-          value={lots}
-          onChange={(e) => setLots(e.target.value)}
-          min="1"
+          value={1}
+          disabled
         />
       </div>
       <button onClick={handleAllot}>Allot</button>
