@@ -55,17 +55,6 @@ const AdminCreateUser = () => {
       <h2>Create User</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className={styles.formGroup}>
           <label htmlFor="role">Role:</label>
           <select
             id="role"
@@ -75,10 +64,21 @@ const AdminCreateUser = () => {
             required
           >
             <option value="user">User</option>
-            <option value="jobber">Jobber</option>
+            {/* <option value="jobber">Jobber</option> */}
             <option value="banker">Banker</option>
             <option value="admin">Admin</option>
           </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={formData.username}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className={styles.formGroup}>
           <label htmlFor="password">Password:</label>

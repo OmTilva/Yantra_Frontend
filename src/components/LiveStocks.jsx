@@ -6,12 +6,45 @@ const LiveStocks = () => {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [role, setRole] = useState("");
+  const [brokerHouse, setBrokerHouse] = useState(null);
+  const [currentBrokerage, setCurrentBrokerage] = useState(null);
 
   useEffect(() => {
-    const fetchStocks = async () => {
+    const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(
+
+        // Fetch user details
+        const userResponse = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/users/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const user = userResponse.data;
+        setRole(user.role);
+
+        // Fetch broker house details if the user is a jobber
+        if (user.role === "jobber" && user.brokerHouse) {
+          const brokerHouseResponse = await axios.get(
+            `${import.meta.env.VITE_BASE_URL}/brokerhouse/name/${
+              user.brokerHouse.name
+            }`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setBrokerHouse(brokerHouseResponse.data);
+          setCurrentBrokerage(brokerHouseResponse.data.brokerage);
+        }
+
+        // Fetch live stocks
+        const stocksResponse = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/stocks/allStocks`,
           {
             headers: {
@@ -19,17 +52,17 @@ const LiveStocks = () => {
             },
           }
         );
-        setStocks(response.data);
+        setStocks(stocksResponse.data);
       } catch (err) {
-        setError(err.response?.data?.message || "Failed to fetch stocks");
+        setError(err.response?.data?.message || "Failed to fetch data");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchStocks();
+    fetchData();
     // Poll for updates every 5 seconds
-    const interval = setInterval(fetchStocks, 5000);
+    const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, []);
 
@@ -57,12 +90,18 @@ const LiveStocks = () => {
     return "";
   };
 
-  if (loading) return <div>Loading stocks...</div>;
+  if (loading) return <div>Loading data...</div>;
   if (error) return <div className={styles.error}>{error}</div>;
 
   return (
     <div className={styles["main-container"]}>
       <h1 className={styles.h1}>Live Stock Prices</h1>
+      {role === "jobber" && brokerHouse && (
+        <div className={styles.brokerageInfo}>
+          <p>BrokerHouse: {brokerHouse.name}</p>
+          <p>Current Brokerage: {currentBrokerage}%</p>
+        </div>
+      )}
       <div className={styles["stocks-container"]}>
         {stocks.map((stock) => {
           const percentChange = calculatePercentageChange(
