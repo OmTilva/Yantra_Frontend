@@ -81,6 +81,7 @@ const TransactionLogs = () => {
                     <th>Units</th>
                     <th>Price</th>
                     <th>Total Price</th>
+                    <th>Transaction Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -94,6 +95,7 @@ const TransactionLogs = () => {
                       <td>{transaction.units}</td>
                       <td>{transaction.price.toFixed(2)}</td>
                       <td>{transaction.totalPrice.toFixed(2)}</td>
+                      <td>{transaction.transactionTime}</td>
                     </tr>
                   ))}
                 </tbody>
