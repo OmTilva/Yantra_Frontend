@@ -22,7 +22,7 @@ export const navItems = {
     },
   ],
   admin: [
-    { path: "/create-user", label: "Create User" },
+    { path: "/admin-create-user", label: "Create User" },
     { path: "/assign-role", label: "Assign Role" },
     { path: "/create-brokerhouse", label: "BrokerHouse" },
     { path: "/listStocks", label: "List Stock" },

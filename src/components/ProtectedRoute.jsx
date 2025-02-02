@@ -3,7 +3,7 @@ import { validateToken, validateRole, clearAuthData } from "../SecurityUtils";
 
 const rolePermissions = {
   user: ["liveboard"],
-  jobber: ["dashboard", "liveboard", "dashboard", "leaderboard"],
+  jobber: ["dashboard", "liveboard", "leaderboard"],
   banker: [
     "dashboard",
     "create-user",
@@ -18,7 +18,7 @@ const rolePermissions = {
   admin: [
     "dashboard",
     "allot-multiple-stocks",
-    "create-user",
+    "admin-create-user",
     "assign-role",
     "create-brokerhouse",
     "listStocks",

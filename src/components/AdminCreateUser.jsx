@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "axios";
 import styles from "../styles/CreateUser.module.css";
 
-const CreateUser = () => {
+const AdminCreateUser = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     role: "user", // Default role set to user
+    password: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -32,13 +33,10 @@ const CreateUser = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Set common password for all users
-    const password = "DalalStreet2.0";
-
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BASE_URL}/users/register`,
-        { ...formData, password },
+        formData,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -67,6 +65,32 @@ const CreateUser = () => {
             required
           />
         </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="role">Role:</label>
+          <select
+            id="role"
+            name="role"
+            value={formData.role}
+            onChange={handleChange}
+            required
+          >
+            <option value="user">User</option>
+            <option value="jobber">Jobber</option>
+            <option value="banker">Banker</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <div className={styles.formGroup}>
+          <label htmlFor="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
         <button
           type="submit"
           className={styles.submitButton}
@@ -79,4 +103,4 @@ const CreateUser = () => {
   );
 };
 
-export default CreateUser;
+export default AdminCreateUser;

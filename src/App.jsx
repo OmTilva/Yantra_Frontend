@@ -8,7 +8,6 @@ import {
   useNavigate,
 } from "react-router-dom";
 import LiveStocks from "./components/LiveStocks";
-import Ipo from "./components/Ipo";
 import AccountSearch from "./components/AccountSearch";
 import IpoLogs from "./components/IpoLogs";
 import TransactionLogs from "./components/TransactionLogs";
@@ -31,6 +30,7 @@ import ApplyIPO from "./components/ApplyIpo";
 import AllotIPO from "./components/AllotIpo";
 import ManageIPO from "./components/ManageIpo";
 import CreateBrokerHouse from "./components/CreateBrokerHouse";
+import AdminCreateUser from "./components/AdminCreateUser";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -161,6 +161,17 @@ function App() {
           <ProtectedRoute userRole={userRole}>
             <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
             <CreateUser />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: "/admin-create-user",
+      element: (
+        <>
+          <ProtectedRoute userRole={userRole}>
+            <Navbar userRole={userRole} onLogout={handleLogout} />{" "}
+            <AdminCreateUser />
           </ProtectedRoute>
         </>
       ),
