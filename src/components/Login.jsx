@@ -6,7 +6,6 @@ import axios from "axios";
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -46,13 +45,12 @@ const Login = ({ onLogin }) => {
         navigate(targetRoute);
       }
     } catch (error) {
-      setError(error.response?.data?.message || "Login failed");
+      alert(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
-  // Add debug log for redirect check
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -65,11 +63,6 @@ const Login = ({ onLogin }) => {
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <h2>Login</h2>
-          {error && (
-            <div className={`${styles.error} ${styles.errorMessage}`}>
-              {error}
-            </div>
-          )}
           <div className={styles.formGroup}>
             <label htmlFor="username">Username</label>
             <input
