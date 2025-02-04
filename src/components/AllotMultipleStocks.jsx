@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,6 +12,8 @@ const AllotMultipleStocks = () => {
   const [totalSum, setTotalSum] = useState(0);
   const [selectedUserId, setSelectedUserId] = useState("");
   const [selectedUserBalance, setSelectedUserBalance] = useState(0);
+
+  const quantityRefs = useRef([]);
 
   useEffect(() => {
     fetchUsers();
@@ -28,6 +30,22 @@ const AllotMultipleStocks = () => {
       setSelectedUserBalance(selectedUser ? selectedUser.balance : 0);
     }
   }, [selectedUserId, users]);
+
+  useEffect(() => {
+    const handleWheel = (e) => e.preventDefault();
+    quantityRefs.current.forEach((ref) => {
+      if (ref) {
+        ref.addEventListener("wheel", handleWheel, { passive: false });
+      }
+    });
+    return () => {
+      quantityRefs.current.forEach((ref) => {
+        if (ref) {
+          ref.removeEventListener("wheel", handleWheel);
+        }
+      });
+    };
+  }, [allotments]);
 
   const fetchUsers = async () => {
     try {
@@ -187,6 +205,7 @@ const AllotMultipleStocks = () => {
                 }
                 required
                 min="1"
+                ref={(el) => (quantityRefs.current[index] = el)}
               />
 
               <input

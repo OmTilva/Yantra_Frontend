@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "../styles/Transaction.module.css";
+import TradePopup from "./TradePopup";
 
 const Transaction = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,10 @@ const Transaction = () => {
   const [userRole, setUserRole] = useState("");
   const [brokerHouses, setBrokerHouses] = useState([]);
   const [message, setMessage] = useState({ text: "", type: "" });
+  const [tradeDetails, setTradeDetails] = useState(null);
+  const [isTransaction, setIsTransaction] = useState(false);
+
+  const quantityInputRef = useRef(null);
 
   useEffect(() => {
     // Fetch user role from the server or local storage
@@ -60,6 +65,17 @@ const Transaction = () => {
     fetchBrokerHouses();
   }, []);
 
+  useEffect(() => {
+    const quantityInput = quantityInputRef.current;
+    if (quantityInput) {
+      const handleWheel = (e) => e.preventDefault();
+      quantityInput.addEventListener("wheel", handleWheel, { passive: false });
+      return () => {
+        quantityInput.removeEventListener("wheel", handleWheel);
+      };
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -94,6 +110,8 @@ const Transaction = () => {
         }
       );
       toast.success(`Transaction successful: ${response.data.message}`);
+      setTradeDetails(response.data.transaction);
+      setIsTransaction(true);
       setFormData({
         sellerId: "",
         buyerId: "",
@@ -129,6 +147,8 @@ const Transaction = () => {
         }
       );
       setMessage({ text: response.data.message, type: "success" });
+      setTradeDetails(response.data.transaction);
+      setIsTransaction(false);
       setFormData({
         sellerId: "",
         buyerId: "",
@@ -149,9 +169,41 @@ const Transaction = () => {
     }
   };
 
+  const handleClosePopup = () => {
+    setTradeDetails(null);
+  };
+
+  const handleRevert = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/stocks/revert-transaction`,
+        { transactionID: tradeDetails.transactionID },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      toast.success(`Transaction reverted: ${response.data.message}`);
+      setTradeDetails(null);
+    } catch (error) {
+      toast.error(
+        `Failed to revert transaction: ${error.response.data.message}`
+      );
+    }
+  };
+
   return (
     <div className={styles.container}>
       <ToastContainer />
+      {tradeDetails && (
+        <TradePopup
+          tradeDetails={tradeDetails}
+          onClose={handleClosePopup}
+          onRevert={isTransaction ? handleRevert : null}
+          isTransaction={isTransaction}
+        />
+      )}
       <div className={styles.formContainer}>
         <h1 className={styles.title}>TRANSACTION</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -273,6 +325,7 @@ const Transaction = () => {
               name="quantity"
               value={formData.quantity}
               onChange={handleChange}
+              ref={quantityInputRef}
               required
             />
           </div>
