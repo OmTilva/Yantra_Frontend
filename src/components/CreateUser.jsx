@@ -33,7 +33,7 @@ const CreateUser = () => {
     setLoading(true);
 
     // Set common password for all users
-    const password = "DalalStreet2.0";
+    const password = import.meta.env.VITE_DEFAULT_User_PASSWORD;
 
     try {
       const response = await axios.post(

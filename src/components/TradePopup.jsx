@@ -2,6 +2,12 @@ import React from "react";
 import styles from "../styles/TradePopup.module.css";
 
 const TradePopup = ({ tradeDetails, onClose, onRevert, isTransaction }) => {
+  const handleRevertClick = () => {
+    if (window.confirm("Are you sure you want to revert this transaction?")) {
+      onRevert();
+    }
+  };
+
   return (
     <div className={styles.popupOverlay}>
       <div className={styles.popup}>
@@ -25,7 +31,7 @@ const TradePopup = ({ tradeDetails, onClose, onRevert, isTransaction }) => {
           <strong>Total Price:</strong> {tradeDetails.totalPrice}
         </p>
         {isTransaction && (
-          <button onClick={onRevert} className={styles.revertButton}>
+          <button onClick={handleRevertClick} className={styles.revertButton}>
             Revert Transaction
           </button>
         )}
