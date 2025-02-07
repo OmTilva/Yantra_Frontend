@@ -1,10 +1,10 @@
-.main-container {
+/* .main-container {
   margin-top: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  position: relative; /* Added to position the brokerage info */
+  position: relative; 
 }
 .h1 {
   color: #b4cded;
@@ -58,11 +58,11 @@
 }
 
 .current-stock-name {
-  color: rgba(0, 0, 0, 0.8); /* Light Blue */
+  color: rgba(0, 0, 0, 0.8); 
 }
 
 .last-stock-price {
-  color: #d3d3d3; /* Light Gray */
+  color: #d3d3d3; 
 }
 .green {
   color: green;
@@ -80,4 +80,184 @@
 }
 .last-stock-price {
   color: #3f3f46e6;
+} */
+.main-container {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Dark background for better contrast */
+}
+
+.h1 {
+  color: #ffffff; /* Bright white for better visibility */
+  font-style: normal;
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.brokerageInfo {
+  flex-direction: column;
+  position: absolute;
+  display: flex;
+  top: 20px;
+  left: 20px;
+  background: #2d2d2d;
+  padding: 20px;
+  border-radius: 8px;
+  color: #ffffff;
+  gap: 15px;
+  font-size: 1.5rem;
+  align-items: center;
+  border: 2px solid #4a4a4a;
+}
+
+.stocks-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1800px; /* Increased for projector display */
+  margin: 0 auto 24px;
+  padding: 0 30px;
+}
+
+@media (min-width: 1800px) {
+  .stocks-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Larger screen/projector specific styles */
+@media (min-width: 2000px) {
+  .stocks-container {
+    max-width: 2400px;
+  }
+
+  .liveStock {
+    padding: 30px !important;
+  }
+
+  .current-stock-name {
+    font-size: 2.5rem !important;
+  }
+
+  .stock-price-container p,
+  .last-stock-price,
+  .percentage {
+    font-size: 2rem !important;
+  }
+}
+
+.liveStock {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  background-color: #2c3e50; /* Darker, more visible background */
+  border-radius: 15px;
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 2px solid #34495e;
+  transition: transform 0.2s;
+}
+
+.liveStock:hover {
+  transform: scale(1.02);
+}
+
+.stock-price-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.current-stock-name {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.last-stock-price {
+  color: #bdc3c7;
+  font-size: 1.5rem;
+}
+
+.green {
+  color: #2ecc71; /* Brighter green */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.red {
+  color: #e74c3c; /* Brighter red */
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.percentage {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.stock-percentage-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Additional responsive breakpoints for different screen sizes */
+@media (max-width: 1400px) {
+  .stocks-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+
+  .current-stock-name {
+    font-size: 1.75rem;
+  }
+
+  .stock-price-container p,
+  .last-stock-price,
+  .percentage {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stocks-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .h1 {
+    font-size: 2rem;
+  }
+
+  .current-stock-name {
+    font-size: 1.5rem;
+  }
+
+  .stock-price-container p,
+  .last-stock-price,
+  .percentage {
+    font-size: 1.125rem;
+  }
+
+  .liveStock {
+    padding: 15px;
+  }
 }
