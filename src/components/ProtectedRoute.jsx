@@ -6,13 +6,13 @@ const rolePermissions = {
   jobber: ["dashboard", "liveboard"],
   banker: [
     "dashboard",
-    "create-user",
+    // "create-user",
     "allot-multiple-stocks",
-    "apply-ipo",
     "transaction",
-    "search-transaction",
-    "search-ipo",
-    "search-account",
+    "apply-ipo",
+    // "search-transaction",
+    // "search-ipo",
+    // "search-account",
   ],
   admin: [
     "dashboard",
