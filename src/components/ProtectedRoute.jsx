@@ -30,7 +30,7 @@ const rolePermissions = {
     "search-transaction",
     "search-ipo",
     "updater",
-    // "leaderboard",
+    "leaderboard",
   ],
 };
 
