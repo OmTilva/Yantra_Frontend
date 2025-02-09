@@ -40,5 +40,6 @@ export const navItems = {
     },
     { path: "/updater", label: "Market Updater" },
     { path: "/leaderboard", label: "Leaderboard" },
+    //{ path: "/leaderboard", label: "Leaderboard" },
   ],
 };
