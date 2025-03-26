@@ -41,7 +41,7 @@ const Navbar = ({ userRole, onLogout }) => {
   return (
     <nav className={styles.nav}>
       <div>
-        <h1>Dalal Street 2.0 {userRole !== "user" && userRole}</h1>
+        <h1>Stock Market Simulator {userRole !== "user" && userRole}</h1>
       </div>
       <div className={styles.navLinks}>
         {allowedNavItems.map((item) => {

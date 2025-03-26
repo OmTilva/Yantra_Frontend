@@ -59,7 +59,7 @@ const Login = ({ onLogin }) => {
 
   return (
     <>
-      <h1 className={styles.heading}>Dalal Street 2.0</h1>
+      <h1 className={styles.heading}>Stock Market Simulator</h1>
       <div className={styles.loginContainer}>
         <form onSubmit={handleSubmit} className={styles.loginForm}>
           <h2>Login</h2>
