@@ -1,4 +1,5 @@
 .heading {
+  color: beige;
   text-align: center;
   margin-top: 60px;
   text-decoration: underline;
@@ -21,7 +22,7 @@
 .loginForm h2 {
   margin-bottom: 1.5rem;
   text-align: center;
-  color: black;
+  color: beige;
 }
 
 .formGroup {
